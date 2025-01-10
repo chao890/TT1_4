@@ -45,9 +45,11 @@ module.exports = {
     getOverdue: async(req, res) => {
         try {
             const companyId = req.body.companyId
-            var datetime = new Date();
-            const [row] = await pool.query("SELECT allertMessage FROM requests WHERE companyName=?", [companyName])
-
+            var datetime = new Date()
+            console.log("Date: ", datetime)
+            var dateThres = datetime - 7
+            const [row] = await pool.query("SELECT alertMessage FROM requests WHERE companyId=? AND updatedDatetime<?", [companyId, dateThres])
+            res.status(200).send({data: row})
         }catch(error){
             console.log("Error in getting overdue requests", error)
         }

@@ -81,3 +81,6 @@ INSERT INTO `company` (`id`, `companyName`, `activeAccount`, `carbonBalance`, `c
 	(20, 'Abbott - Hane', 1, 4419, 487599, '2024-07-04 00:00:00', '2024-08-11 00:00:00'),
 	(21, 'Koelpin LLC', 1, 4708, 509389, '2024-04-12 00:00:00', '2024-09-06 00:00:00'),
 	(22, 'Farrell, Collins and Windler', 1, 1252, 277831, '2023-07-21 00:00:00', '2024-08-01 00:00:00');
+INSERT INTO requests (id, companyId, requestorCompanyId, carbonUnitPrice, carbonQuantity, requestReason, requestType, createdDatetime, updatedDatetime, alertmessage) VALUES
+    (1, 1, 2, 10, 100, 'Reason', 'Type', '2023-02-10 00:00:00', '2024-11-18 00:00:00', 'Have alert'),
+    (2, 3, 4, 20, 200, 'Reason', 'Type', '2025-01-11 10:00:00', '2025-01-11 10:00:00', 'No alert'),

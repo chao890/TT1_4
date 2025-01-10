@@ -20,10 +20,38 @@ module.exports = {
     temp: (req, res) => {
         res.status(200).send("testing")
     }, 
+    
+    getBalance: async (req, res) => {
+        try {
+            const companyName = req.body.companyName
+            const [row] = await pool.query("SELECT carbonBalance, cashBalance FROM company WHERE companyName=?", [companyName])
+            res.status(200).send({data: row})
+        }catch(error){
+            console.log("Error in getBalance", error)
+        }
+    },
 
-    getBalance: aync (req, res) => {
-        const companyName = req.body.companyName
-        const [carbonBalanceRes, cashBalanceRes] = await pool.query("SELECT carbonBalance, cashBalance FROM company WHERE companyName=?", [companyName])
-        return res.status(200).send({carbonBalance: carbonBalanceRes, cashBalance: cashBalanceRes})
+    updateStatus: async(req, res) => {
+        try {
+            const companyId = req.body.companyId
+            const requestStatus = req.body.requestStatus
+            const [row] = await pool.query("UPDATE requests SET requestStatus=? WHERE companyId=?", [requestStatus, companyId])
+            res.status(200).send({data: row})
+        }catch(error){
+            console.log("Error in updating request status", error)
+        }
+    }, 
+
+    getOverdue: async(req, res) => {
+        try {
+            const companyId = req.body.companyId
+            var datetime = new Date();
+            const [row] = await pool.query("SELECT allertMessage FROM requests WHERE companyName=?", [companyName])
+
+        }catch(error){
+            console.log("Error in getting overdue requests", error)
+        }
     }
+
+
 }

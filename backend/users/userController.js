@@ -46,9 +46,9 @@ module.exports = {
         try {
             const companyId = req.body.companyId
             var datetime = new Date()
+            datetime.setDate(datetime.getDate()-7)
             console.log("Date: ", datetime)
-            var dateThres = datetime - 7
-            const [row] = await pool.query("SELECT alertMessage FROM requests WHERE companyId=? AND updatedDatetime<?", [companyId, dateThres])
+            const [row] = await pool.query("SELECT alertMessage FROM requests WHERE companyId=? AND updatedDatetime<?", [companyId, datetime])
             res.status(200).send({data: row})
         }catch(error){
             console.log("Error in getting overdue requests", error)

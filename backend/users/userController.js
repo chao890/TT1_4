@@ -88,7 +88,7 @@ module.exports = {
             } catch (error) {
             console.log(error);
             console.log("Error in creating request");
-            }}
+            }},
     //     const result = userService.createRequest([
     //   companyId,
     //   requestorCompanyId,
@@ -101,6 +101,26 @@ module.exports = {
     //   createdDate,
     //   alertMessage,
     // ])}
+    editRequest: async(req, res) => {
+        try{
+            const companyId = req.body.companyId
+            const companyName = req.body.companyName
+            const requestStatus = req.body.requestStatus
+            const requestType = req.body.requestType
+            const carbonPrice = req.body.carbonPrice
+            const carbonQuantity = req.body.carbonQuantity
+            const requestReason = req.body.requestReason
+        
+            const updatedTime = new Date()
+            const [row] = await pool.query("UPDATE requests SET ? WHERE companyId=?", [companyId, companyName, requestReason,requestStatus, requestType, carbonPrice, carbonQuantity]);
+            res.status(200).send({data: row})
+
+            console.log("Request edited successfully")
+        }
+        catch(error){
+            console.log("Error in editing request", error)
+        }
+    }
 
 
 }

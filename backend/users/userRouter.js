@@ -8,5 +8,6 @@ router.get("/users/info", authenticate, userController.temp)
 router.get("/users/getBalance", userController.getBalance)
 router.patch("/users/updateStatus", userController.updateStatus)
 router.get("/users/getOverdue", userController.getOverdue)
+router.post("/users/requests/createRequest", userController.createRequest)
 
 module.exports = router

@@ -53,7 +53,54 @@ module.exports = {
         }catch(error){
             console.log("Error in getting overdue requests", error)
         }
-    }
+    },
+
+    createRequest: async (req,res) => {
+        const { companyName, requestorCompanyName, carbonUnitPrice, carbonQuantity, requestReason, requestType } = req.body;
+        const [companyrow] = await pool.query("SELECT id FROM company WHERE companyName=?", [companyName,])
+        
+        const [requestercompanyrow] = await pool.query("SELECT id FROM company WHERE companyName=?", [requestorCompanyName,])
+
+        const requestStatus = "Pending";
+        const createdDate = Date.now();
+        const companyId = companyrow[0]["id"]
+        const requestorCompanyId = requestercompanyrow[0]["id"]
+        const alertMessage = `You have a request from ${requestorCompanyId} for ${carbonQuantity} units at $${carbonUnitPrice} unit price.`;        
+        console.log("Testing")
+        try {
+            const request = [
+                companyId,
+                requestorCompanyId,
+                carbonUnitPrice,
+                carbonQuantity,
+                requestReason,
+                requestStatus,
+                requestType,
+                createdDate,
+                createdDate,
+                alertMessage,
+              ];
+            let sql = `INSERT INTO requests(companyId, requestorCompanyId,carbonUnitPrice,carbonQuantity,requestReason,requestStatus,requestType, createdDatetime,updatedDatetime,alertMessage) VALUES(?,?,?,?,?,?,?,NOW(),NOW(),?)`;
+            console.log(request);
+            const [row] = await pool.query(sql, request);
+            console.log("done adding");
+            return res.status(200).send({ data: row });
+            } catch (error) {
+            console.log(error);
+            console.log("Error in creating request");
+            }}
+    //     const result = userService.createRequest([
+    //   companyId,
+    //   requestorCompanyId,
+    //   carbonUnitPrice,
+    //   carbonQuantity,
+    //   requestReason,
+    //   requestStatus,
+    //   requestType,
+    //   createdDate,
+    //   createdDate,
+    //   alertMessage,
+    // ])}
 
 
 }

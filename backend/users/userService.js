@@ -30,5 +30,18 @@ module.exports = {
             res.clearCookie("token")
             return res.status(401).json({ redirect: "/temp" });
         }
-    }
+    },
+    
+    createRequest: async (req, res) => {
+        try {
+        const request = req;
+        let sql = `INSERT INTO requests(companyId, requestorCompanyId,carbonUnitPrice,carbonQuantity,requestReason,requestStatus,requestType, createdDatetime,updatedDatetime,alertMessage) VALUES(?,?,?,?,?,?,?,NOW(),NOW(),?)`;
+        console.log(request);
+        const [row] = await pool.query(sql, request);
+        return res.status(200).send({ data: row });
+        } catch (error) {
+        console.log(error);
+        console.log("Error in creating request");
+        }
+    },
 }

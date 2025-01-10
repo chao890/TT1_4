@@ -1,4 +1,5 @@
 const userService = require("./userService")
+const pool = require("../database/database")
 
 module.exports = {
     login: async (req, res) => {
@@ -13,5 +14,11 @@ module.exports = {
 
     temp: (req, res) => {
         res.status(200).send("testing")
+    }, 
+
+    getBalance: aync (req, res) => {
+        const companyName = req.body.companyName
+        const [carbonBalanceRes, cashBalanceRes] = await pool.query("SELECT carbonBalance, cashBalance FROM company WHERE companyName=?", [companyName])
+        return res.status(200).send({carbonBalance: carbonBalanceRes, cashBalance: cashBalanceRes})
     }
 }

@@ -17,6 +17,15 @@ const EditRequestModal = (
         const url = ""
         if (validateInputs()) {
             // Call here
+            // axios.patch("/users/requests/createRequest", {
+            //     companyName: userCompany,
+            //     requestorCompanyName: companyName,
+            //     carbonUnitPrice: carbonPrice,
+            //     carbonQuantity: carbonQuantity,
+            //     requestReason: requestingReason,
+            //     requestType: requestType,
+            // })  
+
             console.log("sent api")
             setClose()
             setCompanyName("")
@@ -67,13 +76,14 @@ const EditRequestModal = (
             <DialogTitle>
                 Edit Request
             </DialogTitle>
-            <form>
-            <TextField label="Comapny Name" placeholder="Add Company Name" onChange={(e) => setCompanyName(e.target.value)} error={Boolean(errors.companyName)} helperText={errors.companyName}/>
-                <TextField label="Requesting Reason" placeholder="Add Requesting Reason" onChange={(e) => setRequestingReason(e.target.value)} error={Boolean(errors.requestingReason)} helperText={errors.requestingReason}/>
-                <TextField label="Carbon Price" placeholder="Add Carbon Price" onChange={(e) => setCarbonPrice(e.target.value)} error={Boolean(errors.carbonPrice)} helperText={errors.carbonPrice}/>
-                <TextField label="Carbon Quantity" placeholder="Add Carbon Quantity" onChange={(e) => setCarbonQuantity(e.target.value)} error={Boolean(errors.carbonQuantity)} helperText={errors.carbonQuantity}/>
-                <TextField label="Request Type" placeholder="Add Request Type" onChange={(e) => setRequestType(e.target.value)}error={Boolean(errors.requestType)} helperText={errors.requestType}/>
-            </form>
+            <div style={{display:"flex", flexDirection:"column"}}>
+
+                <TextField style={{ margin:10}} label="Comapny Name" placeholder="Add Company Name" onChange={(e) => setCompanyName(e.target.value)} error={Boolean(errors.companyName)} helperText={errors.companyName}/>
+                <TextField style={{ margin:10}} label="Requesting Reason" placeholder="Add Requesting Reason" onChange={(e) => setRequestingReason(e.target.value)} error={Boolean(errors.requestingReason)} helperText={errors.requestingReason}/>
+                <TextField style={{ margin:10}} label="Carbon Price" placeholder="Add Carbon Price" onChange={(e) => setCarbonPrice(e.target.value)} error={Boolean(errors.carbonPrice)} helperText={errors.carbonPrice}/>
+                <TextField style={{ margin:10}} label="Carbon Quantity" placeholder="Add Carbon Quantity" onChange={(e) => setCarbonQuantity(e.target.value)} error={Boolean(errors.carbonQuantity)} helperText={errors.carbonQuantity}/>
+                <TextField style={{ margin:10}} label="Request Type" placeholder="Add Request Type" onChange={(e) => setRequestType(e.target.value)}error={Boolean(errors.requestType)} helperText={errors.requestType}/>
+            </div>
             <Button align="center"
                 onClick={() => {
                     setClose()

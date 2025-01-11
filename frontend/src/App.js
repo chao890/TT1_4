@@ -1,12 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import SigninPage from "./SigninPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PublicRoute from "./routes/publicRoutes";
 import Home from "./Home";
-import Temp from "./temp";
 import TestPage from "./pages/TestPage"
+import RequestPage from './RequestPage'
 
 function App() {
   return (
@@ -26,7 +25,7 @@ function App() {
         />
         <Route
           path="/requests"
-          element={<PublicRoute children={<Home />} />}
+          element={<PublicRoute children={<RequestPage />} />}
         />
         
         <Route path="/delete"

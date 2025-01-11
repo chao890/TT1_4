@@ -5,6 +5,6 @@ const { authenticate } = require("./userService");
 
 router.get("/users/info", authenticate, userController.temp);
 router.get("/users/requests", userController.getAllRequests);
-router.delete("/:id", userController.deleteRequest);
+router.delete("/users/:id", userController.deleteRequest);
 
 module.exports = router;

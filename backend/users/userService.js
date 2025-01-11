@@ -36,29 +36,25 @@ module.exports = {
       return res.status(401).json({ redirect: "/temp" });
     }
   },
-  getAllRequests: () => {
-    return new Promise((resolve, reject) => {
-      const query = "SELECT * FROM Requests";
-      pool.query(query, (err, results) => {
-        if (err) return reject(err);
-        resolve(results);
-      });
-    });
+  getAllRequests: async () => {
+    try {
+      const [results] = await pool.query("SELECT * FROM Requests");
+      return results;
+    } catch (err) {
+      throw err;
+    }
   },
 
   // Delete a specific request by ID
-  deleteRequest: (requestId) => {
-    return new Promise((resolve, reject) => {
-      const query = "DELETE FROM Requests WHERE id = ?";
-      pool.query(query, [requestId], (err, results) => {
-        if (err) return reject(err);
-        resolve(results);
-      });
-    });
+  deleteRequest: async (requestId) => {
+    try {
+      const [results] = await pool.query(
+        "SELECT * FROM Requests WHERE id = ?",
+        [requestId]
+      );
+      return results;
+    } catch (err) {
+      throw err;
+    }
   },
 };
-
-// module.exports = {
-//     getAllRequests,
-//     deleteRequest,
-// };

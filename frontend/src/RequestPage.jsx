@@ -8,7 +8,6 @@ import {
   Link,
   TextField,
 } from "@mui/material";
-
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import List from '@mui/material/List';
@@ -24,11 +23,15 @@ import Typography from '@mui/material/Typography';
 import { blue, red } from '@mui/material/colors';
 import ErrorIcon from '@mui/icons-material/Error';
 import Navbar from './components/Navbar'
+import instance from './axiosInstance'
 
 const alerts = [
   'Overdue request 12: You have yet to approve TechTrek 2025 Pte Ltd’s request to sell 3.5 units of carbon at $500.25.',
-  'test'
+  'Overdue request 11: You have yet to approve TechTrek 2025 Pte Ltd’s request to sell 3.5 units of carbon at $500.25.',
 ];
+
+// const response = await instance.get('/endpoint');
+// console.log(response)
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;

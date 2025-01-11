@@ -27,7 +27,7 @@ import {
 } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 
-function createData(id, date, name, price, quantity, reason, protein) {
+function createData(id, date, name, price, quantity, reason, type) {
   return {
     id,
     date,
@@ -35,13 +35,13 @@ function createData(id, date, name, price, quantity, reason, protein) {
     price,
     quantity,
     reason,
-    protein,
+    type,
   };
 }
 
 const rows = [
-  createData(1, '11/01/25', 'PBS', 305, 3.7, 'reason', 4.3),
-  createData(1, '12/01/25', 'PBS', 305, 3.7, 'reason', 4.3),
+  createData(1, '11/01/25', 'PBS', 305, 3.7, 'reason', 'Buy'),
+  createData(1, '12/01/25', 'PBS', 305, 3.7, 'reason', 'Sell'),
   // createData(2, 'Donut', 452, 25.0, 51, 4.9),
   // createData(3, 'Eclair', 262, 16.0, 24, 6.0),
   // createData(4, 'Frozen yoghurt', 159, 6.0, 24, 4.0),
@@ -56,6 +56,15 @@ const rows = [
   // createData(13, 'Oreo', 437, 18.0, 63, 4.0),
 ];
 
+
+function handleAccept() {
+  console.log('Accept')
+  // setIsDialogOpen(true)
+}
+
+function handleReject() {
+  console.log('reject')
+}
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -79,8 +88,8 @@ const headCells = [
   {
     id: 'date',
     numeric: false,
-    disablePadding: false,
-    label: 'date',
+    disablePadding: true,
+    label: 'Request Date',
   },
   {
     id: 'name',
@@ -92,25 +101,25 @@ const headCells = [
     id: 'price',
     numeric: true,
     disablePadding: false,
-    label: 'Price',
+    label: 'Carbon Price',
   },
   {
     id: 'quantity',
     numeric: true,
     disablePadding: false,
-    label: 'Quantity',
+    label: 'Carbon Quantity',
   },
   {
     id: 'reason',
     numeric: true,
     disablePadding: false,
-    label: 'Reason',
+    label: 'Requesting Reason',
   },
   {
-    id: 'protein',
+    id: 'type',
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: 'Request Type',
   },
 ];
 
@@ -173,15 +182,6 @@ EnhancedTableHead.propTypes = {
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
   // const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-
-  function handleAccept() {
-    console.log('Accept')
-    // setIsDialogOpen(true)
-  }
-  
-  function handleReject() {
-    console.log('reject')
-  }
 
   return (
     <Toolbar
@@ -250,6 +250,18 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
   isDialogOpen: PropTypes.bool.isRequired,
 };
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export default function EnhancedTable() {
@@ -378,7 +390,7 @@ export default function EnhancedTable() {
                     <TableCell align="right">{row.price}</TableCell>
                     <TableCell align="right">{row.quantity}</TableCell>
                     <TableCell align="right">{row.reason}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell align="right">{row.type}</TableCell>
                   </TableRow>
                 );
               })}

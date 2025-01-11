@@ -5,8 +5,26 @@ import { Box } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../slices/authSlice";
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+
 const Navbar = () => {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+        dispatch(setCredentials('invalid'));
+        navigate('/');
+        toast.success("Logout successful!");
+    } catch (err) {
+        toast.error(err?.data?.message || err.error);
+    }
+    };
 
   return (
     <AppBar position="static" style={{ background: '#CD3333' }}>
@@ -55,7 +73,7 @@ const Navbar = () => {
     <div>
         <Typography variant="h7" component="div" sx={{ flexGrow: 1, display: 'flex', padding: '10px',marginTop:"30px",'&:hover': { color: 'black' }  }}>
         <Link href="/" color="inherit">
-         <LogoutIcon />
+         <LogoutIcon onClick={handleLogout} />
         </Link>
         </Typography>
     </div>

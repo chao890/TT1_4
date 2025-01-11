@@ -28,6 +28,7 @@ const SigninPage = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
+  
 
   const validate = () => {
     const validationErrors = {};
@@ -67,8 +68,8 @@ const SigninPage = () => {
   // };
 
   useEffect(() => {
-    if (userInfo) {
-      navigate('/');
+    if (userInfo=='invalid') {
+      navigate('/home');
     }
   }, [navigate, userInfo]);
 
@@ -79,9 +80,9 @@ const SigninPage = () => {
         return; // Stop submission if validation fails
       }
       // const res = await login({ username, password, companyName }).unwrap();
-      // dispatch(setCredentials({ ...res }));
+      dispatch(setCredentials('valid'));
       await login({ username, password, companyName });
-      navigate('/');
+      navigate('/home');
       toast.success("Login successful!");
     } catch (err) {
       toast.error(err?.data?.message || err.error);

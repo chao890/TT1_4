@@ -2,8 +2,6 @@ const pool = require("../database/database");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config/config");
-//require db
-const db = require("../database/database.js");
 
 module.exports = {
   login: async (req) => {
@@ -37,7 +35,7 @@ module.exports = {
   getAllRequests: () => {
     return new Promise((resolve, reject) => {
       const query = "SELECT * FROM Requests";
-      db.query(query, (err, results) => {
+      pool.query(query, (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });
@@ -48,7 +46,7 @@ module.exports = {
   deleteRequest: (requestId) => {
     return new Promise((resolve, reject) => {
       const query = "DELETE FROM Requests WHERE id = ?";
-      db.query(query, [requestId], (err, results) => {
+      pool.query(query, [requestId], (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });

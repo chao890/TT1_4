@@ -1,6 +1,5 @@
 const userService = require("./userService");
 const pool = require("../database/database.js");
-const requestService = require("./requestService");
 
 module.exports = {
   login: async (req, res) => {
@@ -32,7 +31,7 @@ module.exports = {
 
   getAllRequests: async (req, res) => {
     try {
-      const requests = await requestService.getAllRequests(req.query);
+      const requests = await userService.getAllRequests(req.query);
       res.json({ requests });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -41,7 +40,7 @@ module.exports = {
 
   deleteRequest: async (req, res) => {
     try {
-      const response = await requestService.deleteRequest(req.params.id);
+      const response = await userService.deleteRequest(req.params.id);
       res.json(response);
     } catch (err) {
       res.status(404).json({ error: err.message });

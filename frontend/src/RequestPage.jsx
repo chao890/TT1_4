@@ -366,10 +366,25 @@
 
 
 import EnhancedTable from './components/requestTable'
+import {
+  Box,
+  Avatar,
+  Button,
+  Container,
+  Grid2,
+  Link,
+  TextField,
+} from "@mui/material";
 
 const Test = () => {
   return (
-    <EnhancedTable></EnhancedTable>
+    <Container 
+      maxWidth="m" 
+      sx={{ p: 2, border: '1px dashed grey' }}
+    >
+      <EnhancedTable/>
+    </Container>
+    
   )
 }
 

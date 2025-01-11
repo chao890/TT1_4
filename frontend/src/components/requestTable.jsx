@@ -21,6 +21,11 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import { confirmationDialog } from './confirmationDialog'
+import {
+  Grid2,
+} from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
 
 function createData(id, name, calories, fat, carbs, protein) {
   return {
@@ -59,8 +64,12 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
-function handleDelete() {
-  console.log('test')
+function handleAccept() {
+  console.log('Accept')
+}
+
+function handleReject() {
+  console.log('reject')
 }
 
 function getComparator(order, orderBy) {
@@ -193,13 +202,25 @@ function EnhancedTableToolbar(props) {
         </Typography>
       )}
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon 
-              onClick={handleDelete}
-            />
-          </IconButton>
-        </Tooltip>
+        <Grid2 
+          // direction="row"
+          sx={{ display: "inline-flex"}}
+        >
+          <Tooltip title="Delete">
+            <IconButton>
+              <CheckIcon 
+                onClick={handleAccept}
+              />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Delete">
+            <IconButton>
+              <DeleteIcon 
+                onClick={handleReject}
+              />
+            </IconButton>
+          </Tooltip>
+        </Grid2>
       ) : (
         <Tooltip title="Filter list">
           <IconButton>
@@ -214,6 +235,7 @@ function EnhancedTableToolbar(props) {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
+
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');

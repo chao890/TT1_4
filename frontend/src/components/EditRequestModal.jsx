@@ -6,28 +6,60 @@ const EditRequestModal = (
     {open, userCompany, setClose, cName, cPrice, cQuantity, rReason, rType}
 ) => {
     //Other comapny, your company is passed in companyName
-    const [requestTo, setRequestTo] = useState(cName);
+    const [companyName, setCompanyName] = useState(cName);
     const [carbonPrice, setCarbonPrice] = useState(cPrice);
     const [carbonQuantity, setCarbonQuantity] = useState(cQuantity);
     const [requestingReason, setRequestingReason] = useState(rReason);
     const [requestType, setRequestType] = useState(rType);
+    const [errors, setErrors] = useState({});
 
     const handleEdit = () => {
         const url = ""
-        // axios.post(url, {
+        if (validateInputs()) {
+            // Call here
+            console.log("sent api")
+            setClose()
+            setCompanyName("")
+            setCarbonPrice("")
+            setCarbonQuantity("")
+            setRequestingReason("")
+            setRequestType("")
+            setErrors({})
+        } else {
+            console.log("cannot send")
+        }
+    }
 
-        // }).then(
-        //     setClose()
-        // )
-        console.log(requestTo)
-        console.log(requestType)
-
-        setClose()
-        setRequestTo("")
-        setCarbonPrice(0)
-        setCarbonQuantity(0)
-        setRequestingReason("")
-        setRequestType(null)
+    const validateInputs = () => {
+        const validationErrors = {};
+        if (!companyName.trim()) {
+            validationErrors.companyName = "Company Name is Required"
+        }
+        if (!carbonPrice.trim()) {
+            validationErrors.carbonPrice = "Carbon Price is Required"
+        } else {
+            const trimmedCarbonPrice = carbonPrice.trim();
+            if (isNaN(trimmedCarbonPrice) || parseInt(trimmedCarbonPrice) <= 0) {
+                validationErrors.carbonPrice = "Carbon Price needs to be a positive number"
+            }
+        }
+        if (!carbonQuantity.trim()) {
+            validationErrors.carbonQuantity = "Carbon Quantity is Required"
+        }else {
+            const trimmedCarbonQuantity = carbonQuantity.trim();
+            if (isNaN(trimmedCarbonQuantity) || parseInt(trimmedCarbonQuantity) <= 0) {
+                validationErrors.carbonQuantity = "Carbon Price needs to be a positive number"
+            }
+        }
+        if (!requestingReason.trim()) {
+            validationErrors.requestingReason = "Requesting Reason is Required"
+        }
+        if (!requestType.trim()) {
+            validationErrors.requestType = "Request Type is Required"
+        }
+        
+        setErrors(validationErrors);
+        return Object.keys(validationErrors).length === 0
     }
 
     return (
@@ -36,15 +68,11 @@ const EditRequestModal = (
                 Edit Request
             </DialogTitle>
             <form>
-                <TextField label="Comapny Name" placeholder="Add Company Name" onChange={(e) => setRequestTo(e.target.value)}/>
-                <TextField label="Requesting Reason" placeholder="Add Requesting Reason" onChange={(e) => setRequestingReason(e.target.value)}/>
-                <TextField label="Carbon Price" placeholder="Add Carbon Price" onChange={(e) => setCarbonPrice(e.target.value)}/>
-                <TextField label="Carbon Quantity" placeholder="Add Carbon Quantity" onChange={(e) => setCarbonQuantity(e.target.value)}/>
-                <InputLabel id="request-type">Request Type</InputLabel>
-                <Select labelId="request-type" id='qwe' label="Request Type" onChange={(e) => setRequestType(e.target.value)}>
-                    <MenuItem value={"Buy"}>Buy</MenuItem>
-                    <MenuItem value={"Sell"}>Sell</MenuItem>
-                </Select>
+            <TextField label="Comapny Name" placeholder="Add Company Name" onChange={(e) => setCompanyName(e.target.value)} error={Boolean(errors.companyName)} helperText={errors.companyName}/>
+                <TextField label="Requesting Reason" placeholder="Add Requesting Reason" onChange={(e) => setRequestingReason(e.target.value)} error={Boolean(errors.requestingReason)} helperText={errors.requestingReason}/>
+                <TextField label="Carbon Price" placeholder="Add Carbon Price" onChange={(e) => setCarbonPrice(e.target.value)} error={Boolean(errors.carbonPrice)} helperText={errors.carbonPrice}/>
+                <TextField label="Carbon Quantity" placeholder="Add Carbon Quantity" onChange={(e) => setCarbonQuantity(e.target.value)} error={Boolean(errors.carbonQuantity)} helperText={errors.carbonQuantity}/>
+                <TextField label="Request Type" placeholder="Add Request Type" onChange={(e) => setRequestType(e.target.value)}error={Boolean(errors.requestType)} helperText={errors.requestType}/>
             </form>
             <Button
                 onClick={handleEdit}

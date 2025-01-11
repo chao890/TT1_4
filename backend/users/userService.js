@@ -6,9 +6,10 @@ const { SECRET_KEY } = require("../config/config");
 module.exports = {
   login: async (req) => {
     const username = req.body.username;
-    const [row] = await pool.query("SELECT password FROM users WHERE name=?", [
-      username,
-    ]);
+    const [row] = await pool.query(
+      "SELECT password FROM users WHERE username=?",
+      [username]
+    );
     if (!row.length || !row[0]["password"]) {
       return [false, null];
     }
@@ -16,8 +17,12 @@ module.exports = {
     if (!valid) {
       return [false, null];
     }
-    const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1h" });
-    return [true, token];
+    const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1s" });
+    const refreshToken = jwt.sign({ username }, SECRET_KEY, {
+      expiresIn: "1d",
+    });
+
+    return [true, token, refreshToken];
   },
 
   authenticate: (req, res, next) => {
@@ -31,7 +36,6 @@ module.exports = {
       return res.status(401).json({ redirect: "/temp" });
     }
   },
-
   getAllRequests: () => {
     return new Promise((resolve, reject) => {
       const query = "SELECT * FROM Requests";

@@ -1,4 +1,4 @@
-import EnhancedTable from './components/requestTable'
+import EnhancedTable from './components/RequestTable'
 import {
   Box,
   Avatar,
@@ -23,6 +23,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue, red } from '@mui/material/colors';
 import ErrorIcon from '@mui/icons-material/Error';
+import Navbar from './components/Navbar'
 
 const alerts = [
   'Overdue request 12: You have yet to approve TechTrek 2025 Pte Ltd’s request to sell 3.5 units of carbon at $500.25.',
@@ -98,7 +99,8 @@ export default function SimpleDialogDemo() {
       {/* <Typography variant="subtitle1" component="div">
         Selected: {selectedValue}
       </Typography> */}
-      
+      <Navbar/>
+
       <Container 
         maxWidth="m" 
         sx={{ p: 2}}

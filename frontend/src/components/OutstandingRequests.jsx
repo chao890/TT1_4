@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Box} from "@mui/system";
 import { Container } from "@mui/system";
 import Table from '@mui/material/Table';
@@ -11,6 +11,8 @@ import Paper from '@mui/material/Paper';
 import RowItem from "./RowItem";
 import { Button } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddRequestModal from "./AddRequestModal";
+import EditRequestModal from "./EditRequestModal";
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -27,13 +29,28 @@ const rows = [
 
 
 const OutstandingRequests=()=>{
-  return (
+
+    const [add, setAdd] = useState(false);
+    const [edit, setEdit] = useState(false);
+
+    const handleAddClick=()=>{
+     setAdd(true);
+    }
+
+    const handleEditClick=()=> {
+      setEdit(true);
+    }
+ 
+
+
+    return (
     <>
     <Box display="flex">
     <h1 style={{textAlign: "left", marginLeft: "20px"}}>
         Outstanding Requests
     </h1>
-    <Button variant="outlined" startIcon={<AddCircleOutlineIcon />}align="right" style={{marginLeft: "auto", marginRight: "20px", marginTop: "20px", marginBottom: "10px"}}>
+    <Button variant="outlined" startIcon={<AddCircleOutlineIcon />}align="right" style={{marginLeft: "auto", marginRight: "20px",
+         marginTop: "20px", marginBottom: "10px"}} onClick={handleAddClick}>
         Add Request
     </Button>
     </Box>
@@ -48,7 +65,7 @@ const OutstandingRequests=()=>{
             <TableCell align="right">Carbon Quantity</TableCell>
             <TableCell align="right">Requesting Reason</TableCell>
             <TableCell align="right">Requesting Type (Buy/Sell) </TableCell>
-            <TableCell align="right" sx={{marginLeft:"-10px"}} > Edit </TableCell>
+            <TableCell align="right" sx={{marginLeft:"-10px"}} onClick={handleEditClick}> Edit </TableCell>
             <TableCell align="right"> Delete</TableCell>
           </TableRow>
         </TableHead>
@@ -56,9 +73,11 @@ const OutstandingRequests=()=>{
           {rows.map((row) => (
             <RowItem row={row} />
           ))}
+          <EditRequestModal open={edit} setClose={()=> setEdit(false)}  />
         </TableBody>
       </Table>
     </TableContainer>
+    <AddRequestModal open={add} setClose={()=>setAdd(false)}/>  
     </>
   );
 }

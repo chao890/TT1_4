@@ -74,16 +74,28 @@ const EditRequestModal = (
                 <TextField label="Carbon Quantity" placeholder="Add Carbon Quantity" onChange={(e) => setCarbonQuantity(e.target.value)} error={Boolean(errors.carbonQuantity)} helperText={errors.carbonQuantity}/>
                 <TextField label="Request Type" placeholder="Add Request Type" onChange={(e) => setRequestType(e.target.value)}error={Boolean(errors.requestType)} helperText={errors.requestType}/>
             </form>
-            <Button
-                onClick={handleEdit}
-            >
-                Confirm
-            </Button>   
-            <Button
-                onClick={setClose}
-            >
+            <Button align="center"
+                onClick={() => {
+                    setClose()
+                    setCompanyName("")
+                    setCarbonPrice("")
+                    setCarbonQuantity("")
+                    setRequestingReason("")
+                    setRequestType("")
+                    setErrors({})
+                }}
+                variant="outlined"
+                color="error">
                 Cancel 
             </Button>
+
+            <Button
+                onClick={handleEdit}
+                color="success"
+                variant="outlined"
+            >
+                Confirm
+            </Button> 
         </Dialog>
     )
 } 

@@ -1,6 +1,7 @@
 import { Dialog, DialogTitle, FormControl, InputLabel, TextField, Button, Select, MenuItem} from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { Container } from "@mui/material";
 
 const AddRequestModal = (
     {open, userCompany, setClose}
@@ -66,26 +67,42 @@ const AddRequestModal = (
 
     return (
         <Dialog open={open} >
-            <DialogTitle>
+            <DialogTitle variant="h5">
                 Add Request
             </DialogTitle>
-            <form>
-                <TextField label="Comapny Name" placeholder="Add Company Name" onChange={(e) => setCompanyName(e.target.value)} error={Boolean(errors.companyName)} helperText={errors.companyName}/>
+            <Container>
+            <Container >
+            <TextField label="Comapny Name" placeholder="Add Company Name" onChange={(e) => setCompanyName(e.target.value)} error={Boolean(errors.companyName)} helperText={errors.companyName}/>
                 <TextField label="Requesting Reason" placeholder="Add Requesting Reason" onChange={(e) => setRequestingReason(e.target.value)} error={Boolean(errors.requestingReason)} helperText={errors.requestingReason}/>
                 <TextField label="Carbon Price" placeholder="Add Carbon Price" onChange={(e) => setCarbonPrice(e.target.value)} error={Boolean(errors.carbonPrice)} helperText={errors.carbonPrice}/>
                 <TextField label="Carbon Quantity" placeholder="Add Carbon Quantity" onChange={(e) => setCarbonQuantity(e.target.value)} error={Boolean(errors.carbonQuantity)} helperText={errors.carbonQuantity}/>
                 <TextField label="Request Type" placeholder="Add Request Type" onChange={(e) => setRequestType(e.target.value)}error={Boolean(errors.requestType)} helperText={errors.requestType}/>
-            </form>
-            <Button
-                onClick={handleAdd}
-            >
-                Confirm
-            </Button>   
-            <Button
-                onClick={setClose}
-            >
+            </Container>
+              
+            <Button align="center"
+                onClick={() => {
+                    setClose()
+                    setCompanyName("")
+                    setCarbonPrice("")
+                    setCarbonQuantity("")
+                    setRequestingReason("")
+                    setRequestType("")
+                    setErrors({})
+                }}
+                variant="outlined"
+                color="error">
                 Cancel 
             </Button>
+            <Button
+                onClick={handleAdd}
+                color="success"
+                variant="outlined"
+            >
+                Confirm
+            </Button> 
+
+            </Container>
+            
         </Dialog>
     )
 } 

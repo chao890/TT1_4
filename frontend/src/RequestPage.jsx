@@ -21,7 +21,7 @@ import Dialog from '@mui/material/Dialog';
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
+import { blue, red } from '@mui/material/colors';
 import ErrorIcon from '@mui/icons-material/Error';
 
 const alerts = [
@@ -48,7 +48,7 @@ function SimpleDialog(props) {
           <ListItem disablePadding key={email}>
             <ListItemButton onClick={() => handleListItemClick(email)}>
               <ListItemAvatar>
-                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                <Avatar sx={{ bgcolor: red[100], color: red[600] }}>
                   <ErrorIcon />
                 </Avatar>
               </ListItemAvatar>
@@ -98,21 +98,24 @@ export default function SimpleDialogDemo() {
       {/* <Typography variant="subtitle1" component="div">
         Selected: {selectedValue}
       </Typography> */}
+      
       <Container 
         maxWidth="m" 
-        sx={{ p: 2, border: '1px dashed grey' }}
+        sx={{ p: 2}}
       >
         <br />
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Overdue Requests
-        </Button>
+        
         <SimpleDialog
           selectedValue={selectedValue}
           open={open}
           onClose={handleClose}
         />
+        
       
         <EnhancedTable/>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Overdue Requests
+        </Button>
       </Container>
     </div>
   );

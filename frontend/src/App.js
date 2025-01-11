@@ -4,6 +4,7 @@ import SigninPage from "./SigninPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PublicRoute from "./routes/publicRoutes";
 import Home from "./Home";
+import TestPage from "./pages/TestPage"
 import RequestPage from './RequestPage'
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
           element={<PublicRoute children={<RequestPage />} />}
         />
         
+        <Route path="/delete"
+        element={<PublicRoute children={<TestPage />} />}
+        />
       </Routes>
     </BrowserRouter>
 

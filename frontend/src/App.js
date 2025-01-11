@@ -4,7 +4,7 @@ import "./App.css";
 import SigninPage from "./SigninPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PublicRoute from "./routes/publicRoutes";
-import Temp from "./temp";
+import Home from "./Home";
 
 function App() {
   return (
@@ -16,8 +16,17 @@ function App() {
         />
         <Route
           path="/temp"
-          element={<PublicRoute children={<Temp />} />}
+          element={<PublicRoute children={<Home />} />}
         />
+        <Route
+          path="/home"
+          element={<PublicRoute children={<Home />} />}
+        />
+        <Route
+          path="/requests"
+          element={<PublicRoute children={<Home />} />}
+        />
+        
       </Routes>
     </BrowserRouter>
 

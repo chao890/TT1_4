@@ -39,7 +39,7 @@ const SigninPage = () => {
     }
     if (!password) {
       validationErrors.password = "Password is required.";
-    } else if (password.length < 6) {
+    } else if (password.length < 4) {
       validationErrors.password = "Password must be at least 6 characters long.";
     }
     setErrors(validationErrors);
@@ -78,8 +78,9 @@ const SigninPage = () => {
       if (!validate()) {
         return; // Stop submission if validation fails
       }
-      const res = await login({ username, password, companyName }).unwrap();
-      dispatch(setCredentials({ ...res }));
+      // const res = await login({ username, password, companyName }).unwrap();
+      // dispatch(setCredentials({ ...res }));
+      await login({ username, password, companyName });
       navigate('/');
       toast.success("Login successful!");
     } catch (err) {

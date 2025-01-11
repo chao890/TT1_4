@@ -7,9 +7,10 @@ module.exports = {
             if (valid) {
                 res.cookie("token", token, { httpOnly: true })
                 res.cookie("refreshToken", refreshToken, { httpOnly: true })
-                return res.status(200).send("signin successful")
+                return res.status(200).json({ message: "Signin successful" });
             } else {
-                return res.status(401).send("Invalid username or password")
+                return res.status(401).json({ message: "Invalid username or password" });
+
             }
         }
         catch (error) {

@@ -28,14 +28,14 @@ const Navbar = () => {
     </Typography>
 
     <div >
-        <Typography variant="h7" component="div" sx={{display: "inline-block", marginTop:"10px"}}>      
-            <div sx={{display: "inline-block"}}>
-             <AccountBoxIcon />
+        <Typography variant="h7" component="div" sx={{display: "inline-block", marginTop:"10px",marginTop:"10px"}}>      
+            <div align="center" sx={{display: "inline-block"}}>
+             <AccountBoxIcon fontSize="medium"/>
              <p>Username</p>
             </div>
         </Typography>
     </div>
-    <div >
+    <div > 
         <Typography variant="h7" component="div">      
             <div sx={{display: "inline-block"}}>
              <p>Cash Balances</p>

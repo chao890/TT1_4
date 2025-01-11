@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Box} from "@mui/system";
 import { Container } from "@mui/system";
 import Table from '@mui/material/Table';
@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import RowItem from "./RowItem";
 import { Button } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddRequestModal from "./AddRequestModal";
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -27,13 +28,23 @@ const rows = [
 
 
 const OutstandingRequests=()=>{
-  return (
+
+    const [add, setAdd] = useState(false);
+
+    const handleAddClick=()=>{
+     setAdd(true);
+    }
+ 
+
+
+    return (
     <>
     <Box display="flex">
     <h1 style={{textAlign: "left", marginLeft: "20px"}}>
         Outstanding Requests
     </h1>
-    <Button variant="outlined" startIcon={<AddCircleOutlineIcon />}align="right" style={{marginLeft: "auto", marginRight: "20px", marginTop: "20px", marginBottom: "10px"}}>
+    <Button variant="outlined" startIcon={<AddCircleOutlineIcon />}align="right" style={{marginLeft: "auto", marginRight: "20px",
+         marginTop: "20px", marginBottom: "10px"}} onClick={handleAddClick}>
         Add Request
     </Button>
     </Box>
@@ -59,6 +70,7 @@ const OutstandingRequests=()=>{
         </TableBody>
       </Table>
     </TableContainer>
+    <AddRequestModal open={add} setClose={()=>setAdd(false)}/>  
     </>
   );
 }

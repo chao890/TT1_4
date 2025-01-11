@@ -13,6 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Link as RouterLink } from "react-router-dom";
 import axios from "axios";
 import axiosInstance from "./axiosInstance";
+import companyLogo from "./assets/LogoFinal.png";
 
 const SigninPage = () => {
   const handleSubmit = (e) => {
@@ -44,11 +45,12 @@ const SigninPage = () => {
   };
   return (
     <Container maxWidth="xs">
-      <Paper elevation={10} sx={{ marginTop: 8, padding: 2 }}>
+      <Paper elevation={10} sx={{ marginTop: 8, padding: 2 }} align="center">
+        <img src={companyLogo} alt="Company Logo" height="90px" /> 
         <Avatar
           sx={{
             mx: "auto",
-            bgcolor: "secondary.main",
+            bgcolor: "red",
             textAlign: "center",
             mb: 1,
           }}
@@ -78,11 +80,17 @@ const SigninPage = () => {
             type="password"
             sx={{ mb: 2 }}
           />
+          <TextField
+            placeholder="Enter Company Name"
+            fullWidth
+            required
+            sx={{ mb: 2 }}
+          />
           <Button type="submit" variant="contained" fullWidth sx={{ mt: 1 }}>
             Sign In
           </Button>
         </Box>
-        <Box
+        {/* <Box
           component="form"
           onSubmit={(e) => temp(e)}
           noValidate
@@ -91,14 +99,7 @@ const SigninPage = () => {
           <Button type="submit" variant="contained" fullWidth sx={{ mt: 1 }}>
             Sign In
           </Button>
-        </Box>
-        <Grid2 container justifyContent="space-between" sx={{ mt: 1 }}>
-          <Grid2 sx={{ ml: "auto" }}>
-            <Link component={RouterLink} to="/signup">
-              Sign up
-            </Link>
-          </Grid2>
-        </Grid2>
+        </Box> */}
       </Paper>
     </Container>
   );

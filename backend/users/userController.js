@@ -1,7 +1,9 @@
 const userService = require("./userService");
+const pool = require("../database/database.js");
+const requestService = require("./requestService");
 
 module.exports = {
-  signin: async (req, res) => {
+  login: async (req, res) => {
     const [valid, token] = await userService.singin(req);
     if (valid) {
       res.cookie("token", token, { httpOnly: true });
@@ -9,6 +11,10 @@ module.exports = {
     } else {
       return res.status(401).send("Invalid username or password");
     }
+  },
+
+  temp: (req, res) => {
+    res.status(200).send("testing");
   },
 
   signup: (req, res) => {
@@ -33,7 +39,12 @@ module.exports = {
     }
   },
 
-  temp: (req, res) => {
-    res.status(200).send("testing");
+  deleteRequest: async (req, res) => {
+    try {
+      const response = await requestService.deleteRequest(req.params.id);
+      res.json(response);
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
   },
 };

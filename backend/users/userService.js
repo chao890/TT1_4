@@ -14,7 +14,7 @@ module.exports = {
         if (!valid) {
             return [false, null]
         }
-        const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1s" });
+        const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1h" });
         const refreshToken = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1d' })
 
         return [true, token, refreshToken]
@@ -29,6 +29,18 @@ module.exports = {
         } catch (err) {
             res.clearCookie("token")
             return res.status(401).json({ redirect: "/temp" });
+        }
+    },
+
+    refresh: (req, res) => {
+        const refreshToken = req.cookies.token
+        console.log(refreshToken, 'testing')
+        try {
+            const user = jwt.verify(refreshToken, SECRET_KEY)
+            const newToken = jwt.sign({ user }, SECRET_KEY, { expiresIn: "1h" });
+            return [true, newToken]
+        } catch (error) {
+            return [false, null]
         }
     }
 }

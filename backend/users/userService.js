@@ -6,7 +6,8 @@ const { SECRET_KEY } = require('../config/config')
 module.exports = {
     login: async (req) => {
         const username = req.body.username
-        const [row] = await pool.query("SELECT password FROM users WHERE name=?", [username])
+        console.log(bcrypt.hashSync("pass", 10))
+        const [row] = await pool.query("SELECT password FROM users WHERE username=?", [username])
         if (!row.length || !row[0]["password"]) {
             return [false, null]
         }
@@ -15,6 +16,7 @@ module.exports = {
             return [false, null]
         }
         const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1h" });
+
         return [true, token]
     },
 

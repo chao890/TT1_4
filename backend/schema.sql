@@ -15,8 +15,8 @@ CREATE TABLE company (
     activeAccount TEXT NOT NULL,
     carbonBalance FLOAT,
     cashBalance FLOAT,
-    createdDatetime TIMESTAMP,
-    updatedDatetime TIMESTAMP,
+    createdDatetime DATETIME,
+    updatedDatetime DATETIME,
     UNIQUE (companyName)
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE requests (
     requestReason TEXT,
     requestStatus VARCHAR(255),
     requestType VARCHAR(255),
-    createdDatetime TIMESTAMP,
-    updatedDatetime TIMESTAMP,
+    createdDatetime DATETIME,
+    updatedDatetime DATETIME,
     alertMessage TEXT
 );

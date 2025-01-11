@@ -4,13 +4,7 @@ const jwt = require('jsonwebtoken')
 const { SECRET_KEY } = require('../config/config')
 
 module.exports = {
-    signup: (req) => {
-        const username = req.body.username
-        const passwordHash = bcrypt.hashSync(req.body.password, 11)
-        return pool.query("INSERT INTO users (name, password) VALUES (?, ?)", [username, passwordHash])
-    },
-
-    singin: async (req) => {
+    login: async (req) => {
         const username = req.body.username
         const [row] = await pool.query("SELECT password FROM users WHERE name=?", [username])
         if (!row.length || !row[0]["password"]) {

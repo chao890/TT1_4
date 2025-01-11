@@ -30,5 +30,6 @@ CREATE TABLE requests (
     requestStatus VARCHAR(255),
     requestType VARCHAR(255),
     createdDatetime TIMESTAMP,
-    updatedDatetime TIMESTAMP
+    updatedDatetime TIMESTAMP,
+    alertMessage TEXT
 );

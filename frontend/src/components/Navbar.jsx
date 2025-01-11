@@ -29,7 +29,7 @@ const Navbar = () => {
         <Typography variant="h7" component="div" sx={{display: "inline-block", marginTop:"10px"}}>      
             <div sx={{display: "inline-block"}}>
              <AccountBoxIcon />
-             <p>Username!</p>
+             <p>Username</p>
             </div>
         </Typography>
     </div>

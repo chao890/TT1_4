@@ -13,5 +13,28 @@ module.exports = {
 
     temp: (req, res) => {
         res.status(200).send("testing")
+    },
+
+    createRequest: async (req,res) => {
+        const { companyId, requestorCompanyId, carbonUnitPrice, carbonQuantity, requestReason } = req.body;
+        const requestStatus = "Pending";
+        const requestType = "";
+        const createdDate = Date.now();
+        
+        const alertMessage = `You have a request from ${requestorCompanyId} for ${carbonQuantity} units at $${carbonUnitPrice} unit price.`;        
+        console.log("Testing")
+        const result = userService.createRequest([
+      companyId,
+      requestorCompanyId,
+      carbonUnitPrice,
+      carbonQuantity,
+      requestReason,
+      requestStatus,
+      requestType,
+      createdDate,
+      createdDate,
+      alertMessage,
+    ]);
+    
     }
 }

@@ -21,7 +21,7 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import { confirmationDialog } from './confirmationDialog'
+import { ConfirmationDialog } from './confirmationDialog'
 import {
   Grid2,
 } from "@mui/material";
@@ -64,13 +64,7 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
-function handleAccept() {
-  console.log('Accept')
-}
 
-function handleReject() {
-  console.log('reject')
-}
 
 function getComparator(order, orderBy) {
   return order === 'desc'
@@ -169,6 +163,17 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
+  // const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+
+  function handleAccept() {
+    console.log('Accept')
+    // setIsDialogOpen(true)
+  }
+  
+  function handleReject() {
+    console.log('reject')
+  }
+
   return (
     <Toolbar
       sx={[
@@ -234,6 +239,7 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  isDialogOpen: PropTypes.bool.isRequired,
 };
 
 
@@ -244,6 +250,7 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -306,6 +313,9 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
+      {/* <ConfirmationDialog
+        isOpen={isDialogOpen}
+      /> */}
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>

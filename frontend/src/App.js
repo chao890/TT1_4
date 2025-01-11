@@ -1,36 +1,17 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import SigninPage from "./SigninPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PublicRoute from "./routes/publicRoutes";
-import Home from "./Home";
+import { Container } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<PublicRoute children={<SigninPage />} />}
-        />
-        <Route
-          path="/temp"
-          element={<PublicRoute children={<Home />} />}
-        />
-        <Route
-          path="/home"
-          element={<PublicRoute children={<Home />} />}
-        />
-        <Route
-          path="/requests"
-          element={<PublicRoute children={<Home />} />}
-        />
-        
-      </Routes>
-    </BrowserRouter>
-
+    <>
+      <ToastContainer />
+      <Container className='my-2'>
+        <Outlet />
+      </Container>
+    </>
   );
-}
+};
 
 export default App;

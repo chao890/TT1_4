@@ -38,6 +38,7 @@ module.exports = {
         try {
             const user = jwt.verify(refreshToken, SECRET_KEY)
             const newToken = jwt.sign({ user }, SECRET_KEY, { expiresIn: "1h" });
+            console.log('new token', newToken)
             return [true, newToken]
         } catch (error) {
             return [false, null]
